@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+}
+
+@layer components {
+  .wide { font-stretch: 118%; font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1; }
+  .btn { display: inline-block; padding: .85rem 1.5rem; font-weight: 700; border: 2px solid #4a1520; box-shadow: 4px 4px 0 #4a1520; transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #4a1520; }
+  .btn-hero { border-color: #f4ebd8; box-shadow: 4px 4px 0 #f4ebd8; }
+  .btn-hero:hover { box-shadow: 1px 1px 0 #f4ebd8; }
+  .ticker { display: flex; width: max-content; animation: slide 28s linear infinite; }
+  .row { transition: background-color .2s, color .2s; }
+  .row:hover { background: #4a1520; color: #f4ebd8; }
+  .row:hover .row-muted { color: #f4ebd8cc; }
+  .field { width: 100%; margin-top: .25rem; border: 2px solid #4a1520; background: #f4ebd8; padding: .65rem .75rem; border-radius: 0; }
+  .field:focus { outline: 3px solid #eba420; outline-offset: 0; }
+}
+
+@keyframes slide { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker { animation: none; }
+  html { scroll-behavior: auto; }
+}
