@@ -39,8 +39,15 @@
     </div>
     <div class="relative md:col-span-5">
       <div class="absolute inset-0 translate-x-4 translate-y-4 bg-saffron"></div>
-      <div class="relative aspect-[4/5] overflow-hidden bg-clay">
-        <img src="img/hero-1200.jpg" srcset="img/hero-640.jpg 640w, img/hero-1200.jpg 1200w" sizes="(min-width:768px) 40vw, 90vw" data-remote="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?fm=jpg&auto=format&fit=max&w=1200&q=75" alt="Kobieta klęcząca obok mężczyzny podczas ćwiczeń" class="h-full w-full object-cover">
+      <div id="hero-slideshow" class="relative aspect-[4/5] overflow-hidden bg-clay">
+        <!-- Photo 1 -->
+        <img src="img/hero-1200.jpg" srcset="img/hero-640.jpg 640w, img/hero-1200.jpg 1200w" sizes="(min-width:768px) 40vw, 90vw" data-remote="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?fm=jpg&auto=format&fit=max&w=1200&q=75" alt="Kobieta klęcząca obok mężczyzny podczas ćwiczeń" class="absolute inset-0 h-full w-full object-cover">
+        <!-- Photo 2 -->
+        <img src="img/mobilnosc-1200.jpg" srcset="img/mobilnosc-640.jpg 640w, img/mobilnosc-1200.jpg 1200w" sizes="(min-width:768px) 40vw, 90vw" data-remote="https://images.unsplash.com/photo-1540206276207-3af25c08abc4?fm=jpg&auto=format&fit=max&w=1200&q=75" alt="Dwóch mężczyzn podczas ćwiczeń rozciągających na podłodze" class="absolute inset-0 h-full w-full object-cover">
+        <!-- Photo 3 -->
+        <img src="img/silownia-1200.jpg" srcset="img/silownia-640.jpg 640w, img/silownia-1200.jpg 1200w" sizes="(min-width:768px) 40vw, 90vw" data-remote="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?fm=jpg&auto=format&fit=max&w=1200&q=75" alt="Dwie osoby ćwiczące na siłowni" class="absolute inset-0 h-full w-full object-cover">
+        <!-- Photo 4 -->
+        <img src="img/para-1200.jpg" srcset="img/para-640.jpg 640w, img/para-1200.jpg 1200w" sizes="(min-width:768px) 40vw, 90vw" data-remote="https://images.unsplash.com/photo-1648542036561-e1d66a5ae2b1?fm=jpg&auto=format&fit=max&w=1200&q=75" alt="Kobieta i mężczyzna ćwiczący razem" class="absolute inset-0 h-full w-full object-cover">
       </div>
     </div>
   </main>
@@ -180,6 +187,39 @@ document.getElementById('formularz').addEventListener('submit', function (e) {
   }
   s.textContent = 'Dziękuję, ' + f.imie.value.trim() + '. To wersja demonstracyjna – wiadomość nie została wysłana.';
   f.reset();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const slides = document.querySelectorAll('#hero-slideshow img');
+  let currentSlide = 0;
+  
+  if (slides.length > 1) {
+    // Apply default inline styles so it doesn't rely on missing Tailwind classes
+    slides.forEach((slide, index) => {
+      slide.style.transition = "opacity 1s ease-in-out";
+      if (index === 0) {
+        slide.style.opacity = "1";
+        slide.style.zIndex = "10";
+      } else {
+        slide.style.opacity = "0";
+        slide.style.zIndex = "0";
+      }
+    });
+
+    setInterval(() => {
+      // Fade out current
+      slides[currentSlide].style.opacity = "0";
+      slides[currentSlide].style.zIndex = "0";
+      
+      // Calculate next index
+      currentSlide = (currentSlide + 1) % slides.length;
+      
+      // Fade in next
+      slides[currentSlide].style.opacity = "1";
+      slides[currentSlide].style.zIndex = "10";
+    }, 4000); 
+  }
 });
 </script>
 </body>
